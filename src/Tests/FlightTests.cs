@@ -31,7 +31,7 @@ public class FlightsControllerTests
             new Flight { FlightNumber = TestFlightNumber, Price = 1000, FromAirport = TestAirportA, ToAirport = TestAirportB, DateTime = DateTime.Now },
             new Flight { FlightNumber = "UT501", Price = 2000, FromAirport = TestAirportB, ToAirport = TestAirportA, DateTime = DateTime.Now }
         };
-        _repoMock.Setup(r => r.GetAllAsync(0, 100)).ReturnsAsync(flights);
+        _repoMock.Setup(r => r.GetAllAsync(1, 100)).ReturnsAsync(flights);
 
         var result = await _controller.GetAll();
 
@@ -43,7 +43,7 @@ public class FlightsControllerTests
         Assert.Equal("Moscow Sheremetyevo", response[0].FromAirport);
         Assert.Equal("St. Petersburg Pulkovo", response[0].ToAirport);
         
-        _repoMock.Verify(r => r.GetAllAsync(0, 100), Times.Once);
+        _repoMock.Verify(r => r.GetAllAsync(1, 100), Times.Once);
     }
 
     [Fact]
